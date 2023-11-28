@@ -41,9 +41,18 @@ function Playround(computerSelection, playerSelection){
         return win;
     } else if (computerSelection === "Scissors" && playerSelection === "Paper"){
         return lose;
-    } else {
+    } else if (computerSelection === "Scissors" && playerSelection === "Scissors"){
         return `Draw ! Computer chooses ${computerSelection} and you choose ${playerSelection}`;
+    } else if (computerSelection === "Paper" && playerSelection === "Paper"){
+        return `Draw ! Computer chooses ${computerSelection} and you choose ${playerSelection}`;
+    } else if (computerSelection === "Rock" && playerSelection === "Rock"){
+        return `Draw ! Computer chooses ${computerSelection} and you choose ${playerSelection}`;
+    } else {
+        alert("Please enter Rock or Paper or Scissors:");
+        const playerSelection = getPlayerChoice();
+        return Playround(computerSelection, playerSelection);
     }
+
 
 }
 
