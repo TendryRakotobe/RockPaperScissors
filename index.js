@@ -11,39 +11,40 @@ const getComputerChoice = () => {
 
 const getPlayerChoice = () => {
     let choice = prompt("Rock or Paper or Scissors ?");
-    
     let playerChoice = choice.split('');
     let result = playerChoice[0].toUpperCase();
     for(let i = 1; i < playerChoice.length; i++){
         result += playerChoice[i].toLowerCase();
     } 
-    
     return result;
-    
-     
 };
-
-
-
 
 function Playround(computerSelection, playerSelection){
     let lose = `You Lose ! ${computerSelection} beats ${playerSelection}`;
     let win = `You Win ! ${playerSelection} beats ${computerSelection}`;
-    if (computerSelection === "Rock" && playerSelection === "Scissors"){
+    if (computerSelection === "Rock" && 
+        playerSelection === "Scissors"){
         return lose;
-    } else if (computerSelection === "Rock" && playerSelection === "Paper"){
+    } else if (computerSelection === "Rock" && 
+               playerSelection === "Paper"){
         return win;
-    } else if (computerSelection === "Paper" && playerSelection === "Scissors"){
+    } else if (computerSelection === "Paper" && 
+               playerSelection === "Scissors"){
         return win;
-    } else if (computerSelection === "Paper" && playerSelection === "Rock"){
+    } else if (computerSelection === "Paper" && 
+               playerSelection === "Rock"){
         return lose;
-    } else if (computerSelection === "Scissors" && playerSelection === "Rock"){
+    } else if (computerSelection === "Scissors" && 
+               playerSelection === "Rock"){
         return win;
-    } else if (computerSelection === "Scissors" && playerSelection === "Paper"){
+    } else if (computerSelection === "Scissors" && 
+               playerSelection === "Paper"){
         return lose;
-    } else if (computerSelection === "Scissors" && playerSelection === "Scissors"){
+    } else if (computerSelection === "Scissors" && 
+               playerSelection === "Scissors"){
         return `Draw ! Computer chooses ${computerSelection} and you choose ${playerSelection}`;
-    } else if (computerSelection === "Paper" && playerSelection === "Paper"){
+    } else if (computerSelection === "Paper" && 
+               playerSelection === "Paper"){
         return `Draw ! Computer chooses ${computerSelection} and you choose ${playerSelection}`;
     } else if (computerSelection === "Rock" && playerSelection === "Rock"){
         return `Draw ! Computer chooses ${computerSelection} and you choose ${playerSelection}`;
@@ -52,7 +53,22 @@ function Playround(computerSelection, playerSelection){
         const playerSelection = getPlayerChoice();
         return Playround(computerSelection, playerSelection);
     }
+}
 
+function getPlayerScore(round, playerScore){
+    if(round.includes("Win")){
+        return playerScore += 1;
+    } else {
+        return playerScore;
+    }
+}
+
+function getComputerScore(round, computerScore){
+    if(round.includes("Lose")){
+        return computerScore += 1;
+    } else {
+        return computerScore;
+    }
 
 }
 
@@ -65,11 +81,8 @@ function game(){
         const playerSelection = getPlayerChoice();
         let round = Playround(computerSelection, playerSelection);
         alert(round);
-        if (round.includes("Win")){
-            playerScore += 1;
-        } else if(round.includes("Lose")){
-            computerScore += 1;
-        } 
+        playerScore = getPlayerScore(round, playerScore);
+        computerScore = getComputerScore(round, computerScore);
         alert(` Player : ${playerScore}      Computer : ${computerScore}    Round left : ${(MAX_ROUND - 1) - i}`);
     }
     if(playerScore < computerScore){
